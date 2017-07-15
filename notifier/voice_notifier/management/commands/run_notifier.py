@@ -5,7 +5,7 @@ Create on 2017/7/15
 author:Zheng Huang
 '''
 
-import time
+import time, datetime
 
 from django.core.management import BaseCommand
 
@@ -13,28 +13,31 @@ from django.core.management import BaseCommand
 from voice_notifier.models import NsData, OnData, SaData
 from notifier.settings import NS_DATA
 from voice_notifier.voice_notifier import VoiceNotifier
+from voice_notifier.py_voice_notifier import PyVoiceNotifier
 
 
 class Command(BaseCommand):
     """数据库扫描"""
 
     def handle(self, *args, **options):
-        count = 0
 
         while True:
-            time.sleep(120)
-            count += 1
-            data_to_check = NsData.objects.last()
+            data_to_check = NsData.objects.last().key_word
 
             if self.check_data(data_to_check):
                 pass
             else:
                 # 语音通知
-                VoiceNotifier.send_voice_message()
+                timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                # 语音模板审核中，通过后开启。
+                # PyVoiceNotifier.send_voice_notify(timestamp)
+                # PyVoiceNotifier.send_voice_captcha(timestamp)
+                data_to_check.delete()
 
-            if count == 1000:
+            if NsData.objects.all().__len__() > 1000:
                 NsData.objects.all().delete()
-                count = 0
+
+            time.sleep(120)
 
     def check_data(self, data_to_check):
         if data_to_check == NS_DATA:

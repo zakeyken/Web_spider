@@ -135,6 +135,10 @@ YZX_ACCOUNT_SID = 'bfa433f6669aa5f0b6ebab9f473d9dcc'
 YZX_AUTH_TOKEN = 'f1736aa6530ba0b7ff514053d6194b0d'
 YZX_ID = 'wknb@sina.com'
 
+# 片云配置
+PY_API_KEY = 'f8e0f69df18497670436d3b880f18c8f'
+
+
 # 邮箱设置
 EMAIL_HOST = 'smtp.sina.com'
 EMAIL_PORT = 587

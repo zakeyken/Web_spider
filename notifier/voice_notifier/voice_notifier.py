@@ -5,7 +5,7 @@ Create on 2017/7/15
 author:Zheng Huang
 '''
 
-import datetime, base64, hashlib, requests
+import datetime, base64, hashlib, requests, json
 
 from django.core.mail import send_mail
 
@@ -21,11 +21,11 @@ class VoiceNotifier(object):
 
         timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
 
-        sig_parameter_text = '{accout}{auth_token}{timestamp}'.format(
+        sig_parameter_text = '{account}{auth_token}{timestamp}'.format(
             account=YZX_ID, auth_token=YZX_AUTH_TOKEN, timestamp=timestamp)
         sig_parameter = hashlib.md5(sig_parameter_text).hexdigest()
 
-        url = 'https://message.ucpaas.com/{version}/Accounts/{accountSid}/Calls/voiceNotify?sig={SigParameter}'.format(
+        url = 'https://api.ucpaas.com/{version}/Accounts/{accountSid}/Calls/voiceNotify?sig={SigParameter}'.format(
             version=YZX_VERSION, accountSid=YZX_ACCOUNT_SID,
             SigParameter=sig_parameter)
 
@@ -37,18 +37,20 @@ class VoiceNotifier(object):
             'Authorization': authorization,
         }
 
-        data = {
+        data = json.dumps({
             'appId': YZX_APP_ID,
             'to': '18982032410',
             'type': '2',
             'playTimes': '2',
             'templateId': '649827',
             'content': '',
-        }
+        })
 
-        response = requests.post(url, data=data, headers=headers).json()
+        response = requests.post(url, data=data, headers=headers)
 
-        if response['respCode'] == '000000':
+        result = json.loads(response)
+
+        if result['respCode'] == '000000':
             return True
         else:
             send_mail(
