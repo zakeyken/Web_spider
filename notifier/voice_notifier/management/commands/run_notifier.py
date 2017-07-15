@@ -11,7 +11,7 @@ from django.core.management import BaseCommand
 
 
 from voice_notifier.models import NsData, OnData, SaData
-from notifier.settings import NS_DATA
+from django.conf import settings
 from voice_notifier.voice_notifier import VoiceNotifier
 from voice_notifier.py_voice_notifier import PyVoiceNotifier
 
@@ -40,7 +40,7 @@ class Command(BaseCommand):
             time.sleep(120)
 
     def check_data(self, data_to_check):
-        if data_to_check == NS_DATA:
+        if data_to_check == settings.NS_DATA:
             return True
         else:
             return False

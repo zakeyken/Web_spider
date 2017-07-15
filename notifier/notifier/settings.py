@@ -75,17 +75,6 @@ WSGI_APPLICATION = 'notifier.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ca_immigration',
-        'USER': 'root',
-        'PASSWORD': 'Myzh1987',
-        'HOST': 'rm-uf6vwd4k0y2o4b33bo.mysql.rds.aliyuncs.com',
-        'PORT': '',
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -122,26 +111,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# 数据比较基准常量
-
-NS_DATA = 'Category B is now closed.'
-
-# 云之讯配置
-
-YZX_VERSION = '2014-06-30'
-YZX_APP_ID = 'f6e840afa0404b55b6b98def3dbe4016'
-YZX_ACCOUNT_SID = 'bfa433f6669aa5f0b6ebab9f473d9dcc'
-YZX_AUTH_TOKEN = 'f1736aa6530ba0b7ff514053d6194b0d'
-YZX_ID = 'wknb@sina.com'
-
-# 片云配置
-PY_API_KEY = 'f8e0f69df18497670436d3b880f18c8f'
-
-
-# 邮箱设置
-EMAIL_HOST = 'smtp.sina.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'wknb@sina.com'
-EMAIL_HOST_PASSWORD = '1ac2=B67'

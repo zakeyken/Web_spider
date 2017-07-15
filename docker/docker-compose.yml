@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  
+  notifier:
+    restart: always
+    build: ./django/
+    volumes:
+      - /root/Web_spider/notifier:/root/notifier
+    command: python /root/notifier/manage.py run_notifier --settings=notifier.production
