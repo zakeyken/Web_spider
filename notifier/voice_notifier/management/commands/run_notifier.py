@@ -12,6 +12,7 @@ from django.core.management import BaseCommand
 
 from voice_notifier.models import NsData, OnData, SaData
 from notifier.settings import NS_DATA
+from voice_notifier.voice_notifier import VoiceNotifier
 
 
 class Command(BaseCommand):
@@ -29,7 +30,7 @@ class Command(BaseCommand):
                 pass
             else:
                 # 语音通知
-                pass
+                VoiceNotifier.send_voice_message()
 
             if count == 1000:
                 NsData.objects.all().delete()
