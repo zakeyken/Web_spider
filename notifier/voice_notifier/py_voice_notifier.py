@@ -8,7 +8,7 @@ import datetime, requests
 
 from django.core.mail import send_mail
 
-from notifier.settings import PY_API_KEY
+from django.conf import settings
 
 
 def send_email_when_fail(subject, content, recipient_list):
@@ -32,7 +32,7 @@ class PyVoiceNotifier(object):
         url = 'https://voice.yunpian.com/v2/voice/tpl_notify.json'
 
         data = {
-            'apikey': PY_API_KEY,
+            'apikey': settings.PY_API_KEY,
             'mobile': '18982032410',
             'tpl_id': 1875398,
             'tpl_value': u'time=%s' % time,
@@ -56,7 +56,7 @@ class PyVoiceNotifier(object):
         url = 'https://voice.yunpian.com/v2/voice/send.json'
 
         data = {
-            'apikey': PY_API_KEY,
+            'apikey': settings.PY_API_KEY,
             'mobile': '18982032410',
             'code': '1234',
         }
