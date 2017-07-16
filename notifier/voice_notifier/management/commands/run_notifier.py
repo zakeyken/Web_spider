@@ -24,9 +24,7 @@ class Command(BaseCommand):
         while True:
             data_to_check = NsData.objects.last().key_word
 
-            if self.check_data(data_to_check):
-                pass
-            else:
+            if not self.check_data(data_to_check):
                 # 语音通知
                 timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 # 语音模板审核中，通过后开启。
