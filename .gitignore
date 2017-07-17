@@ -105,3 +105,6 @@ ENV/
 
 # production.conf
 production.py
+
+# local_settings
+local_settings.py
