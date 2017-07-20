@@ -17,6 +17,8 @@ class NsSpiderSpider(scrapy.Spider):
     def parse(self, response):
 
         target_string = response.xpath("//article[@role='main']/div[@class='note']/p/strong/text()").extract()[0]
+	if not target_string:
+	    target_string = 'null'
         item = WebSpiderItem()
         item['crawl_time'] = datetime.datetime.now()
         item['key_word'] = target_string

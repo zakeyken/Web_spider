@@ -26,21 +26,22 @@ class PyVoiceNotifier(object):
     """片云API"""
 
     @classmethod
-    def send_voice_notify(self, time):
+    def send_voice_notify(self, phone_number, time, template_id):
         """发送语音通知"""
 
         url = 'https://voice.yunpian.com/v2/voice/tpl_notify.json'
 
         data = {
             'apikey': settings.PY_API_KEY,
-            'mobile': '18982032410',
-            'tpl_id': 1875398,
+            'mobile': phone_number,
+            'tpl_id': template_id,
             'tpl_value': u'time=%s' % time,
         }
 
         response = requests.post(url, data)
 
         if response.status_code == 200:
+            print (response.json())
             return True
 
         else:
